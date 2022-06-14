@@ -1,0 +1,3 @@
+[submodule "Havoc/Dependencies/fmt"]
+	path = Havoc/Dependencies/fmt
+	url = https://github.com/fmtlib/fmt.git

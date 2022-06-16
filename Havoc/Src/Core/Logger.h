@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 namespace Havoc
 {
@@ -21,10 +22,23 @@ namespace Havoc
 		
 	public:
 
-		Hlogger(const LogLevel logLevel, const std::string loggerName)
+		Hlogger()
+		{
+			m_loggerName = "HavocLogger";
+			m_logLevel = LogLevel::Trace;
+		}
+
+		Hlogger(const LogLevel logLevel, const char* loggerName)
 			:m_logLevel(logLevel), m_loggerName(loggerName)
 		{
 
+		}
+
+
+		Hlogger(const char* loggerName)
+			:m_loggerName(loggerName)
+		{
+			m_logLevel = LogLevel::Trace;
 		}
 
 		void setLogLevel(const LogLevel logLevel)
@@ -32,22 +46,25 @@ namespace Havoc
 			m_logLevel = logLevel;
 		}
 
-		void setLoggerName(const std::string loggerName)
+		void setLoggerName(const char* loggerName)
 		{
 			m_loggerName = loggerName;
 		}
-		bool logFatal(const char* msg);
-		bool logError(const char* msg);
-		bool logWarn(const char* msg);
-		bool logDebug(const char* msg);
-		bool logInfo(const char* msg);
-		bool logTrace(const char* msg);
+
+
+		bool Fatal(const char* msg);
+		bool Error(const char* msg);
+		bool Warn(const char* msg);
+		bool Debug(const char* msg);
+		bool Info(const char* msg);
+		bool Trace(const char* msg);
 
 
 	private:
 
 		std::string m_loggerName;
 		LogLevel m_logLevel;
+
 	};
 }
 

@@ -7,6 +7,7 @@
 
 namespace Havoc
 {
+
 	bool Hlogger::log(const LogLevel Level, const char* msg)
 	{
 		const char* levels[] = {"Fatal", "Error", "Debug", "Warn", "Info", "Trace"};
@@ -26,42 +27,42 @@ namespace Havoc
 		return true;
 	}
 
-	bool Hlogger::logFatal(const char* msg)
+	bool Hlogger::Fatal(const char* msg)
 	{
 		if (log(LogLevel::Fatal, msg))
 			return true;
 		return false;
 	}
 
-	bool Hlogger::logError(const char* msg)
+	bool Hlogger::Error(const char* msg)
 	{
 		if (log(LogLevel::Error, msg))
 			return true;
 		return false;
 	}
 
-	bool Hlogger::logWarn(const char* msg)
+	bool Hlogger::Warn(const char* msg)
 	{
 		if (log(LogLevel::Warn, msg))
 			return true;
 		return false;
 	}
 
-	bool Hlogger::logDebug(const char* msg)
+	bool Hlogger::Debug(const char* msg)
 	{
 		if (log(LogLevel::Debug, msg))
 			return true;
 		return false;
 	}
 
-	bool Hlogger::logInfo(const char* msg)
+	bool Hlogger::Info(const char* msg)
 	{
 		if (log(LogLevel::Info, msg))
 			return true;
 		return false;
 	}
 
-	bool Hlogger::logTrace(const char* msg)
+	bool Hlogger::Trace(const char* msg)
 	{
 		if (log(LogLevel::Trace, msg))
 			return true;

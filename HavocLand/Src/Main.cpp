@@ -1,14 +1,24 @@
-#include "Core/Core.h"
-#include "Core/Logger.h"
+#include <Havoc.h>
 
-int main()
+
+class HavocLand : public Havoc::Application
 {
-    Havoc::Hlogger log(Havoc::LogLevel::Info, "HavocLogger");
-    log.logFatal("Havoc Engine");
-    log.logError("Havoc Engine");
-    log.logWarn("Havoc Engine");
-    log.logDebug("Havoc Engine");
-    log.logInfo("Havoc Engine");
-    log.logTrace("Havoc Engine");
-    return 0;
+
+public:
+
+	HavocLand(const char* name)
+		:Havoc::Application(name)
+	{
+
+	}
+	
+	~HavocLand()
+	{
+
+	}
+};
+
+Havoc::Application* Havoc::CreateApplication()
+{
+	return new HavocLand("HavocLand");
 }

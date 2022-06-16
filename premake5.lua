@@ -74,7 +74,7 @@ project "HavocLand"
 
     includedirs
     {
-        "%{wks.location}/Havoc/Src",
+        "%{wks.location}/Havoc/src",
         "%{wks.location}/Havoc/Dependencies/fmt/include"
     }
 

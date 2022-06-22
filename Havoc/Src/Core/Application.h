@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "Window.h"
+
 namespace Havoc
 {
 	class Application
@@ -14,6 +16,7 @@ namespace Havoc
 	private:
 		std::string m_appName;
 		bool m_runnning;
+		std::unique_ptr<Window> m_window;
 	};
 
 	Application* CreateApplication();

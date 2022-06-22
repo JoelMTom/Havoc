@@ -8,6 +8,8 @@ workspace "Havoc"
         "Release"
     }
 
+    characterset ("ASCII")
+
     outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 
@@ -37,7 +39,8 @@ project "Havoc"
 
     includedirs
     {
-        "%{wks.location}/Havoc/Dependencies/fmt/include"
+        "%{wks.location}/Havoc/Dependencies/fmt/include",
+        "%{wks.location}/Havoc/Src"
     }
 
     location "%{wks.location}/Havoc"

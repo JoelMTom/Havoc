@@ -15,13 +15,13 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break;
 	case WM_KEYDOWN:
-		H_CORE_TRACE("{} key Pressed!", (char)wParam);
+		H_CORE_DEBUG("{} key Pressed!", (char)wParam);
 		break;
 	case WM_MOUSEMOVE: {
 		int x_position = GET_X_LPARAM(lParam);
 		int y_position = GET_Y_LPARAM(lParam);
 
-		//H_CORE_TRACE("Mouse Moved: x - {0}, y - {1}", x_position, y_position);
+		H_CORE_DEBUG("Mouse Moved: x - {0}, y - {1}", x_position, y_position);
 	} break;
 	default:
 		return DefWindowProc(hwnd, msg, wParam, lParam);

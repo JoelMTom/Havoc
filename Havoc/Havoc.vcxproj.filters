@@ -34,6 +34,9 @@
     <Filter Include="Src\Core">
       <UniqueIdentifier>{8537E246-7104-3D52-9A1D-2BFA864972E0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Events">
+      <UniqueIdentifier>{513E708D-3DF6-B1DA-A6FD-8A3692D44CCB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Src\Platform">
       <UniqueIdentifier>{011E97C6-ED80-266B-9606-5F218248F2ED}</UniqueIdentifier>
     </Filter>
@@ -126,13 +129,15 @@
     <ClInclude Include="Src\Core\Window.h">
       <Filter>Src\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Events\Event.h">
+      <Filter>Src\Events</Filter>
+    </ClInclude>
     <ClInclude Include="Src\Havoc.h">
       <Filter>Src</Filter>
     </ClInclude>
     <ClInclude Include="Src\Platform\Win32.h">
       <Filter>Src\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Events\Event.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Core\Application.cpp">

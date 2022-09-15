@@ -7,4 +7,4 @@ namespace Havoc
 	{
 		return std::make_unique<Win32>(props);
 	}
-}
+} 

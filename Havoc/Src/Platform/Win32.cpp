@@ -23,6 +23,18 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 		H_CORE_DEBUG("Mouse Moved: x - {0}, y - {1}", x_position, y_position);
 	} break;
+
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(hwnd, &ps);
+
+		HBRUSH hBrush = CreateSolidBrush(RGB(255, 109, 5));
+
+		FillRect(hdc, &ps.rcPaint, hBrush);
+
+		EndPaint(hwnd, &ps);
+	}
 	default:
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}

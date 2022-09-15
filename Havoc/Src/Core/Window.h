@@ -1,6 +1,5 @@
 #pragma once
 
-#include <stdint.h>
 #include <memory>
 
 namespace Havoc
@@ -28,10 +27,5 @@ namespace Havoc
 		virtual void OnUpdate() = 0;
 
 		static std::unique_ptr<Window> Create(const WindowProperties& props = WindowProperties("Havoc Engine", 720, 600));
-
-	private:
-		const char* m_windowName;
-		int m_width = 720;
-		int m_height = 600;
 	};
-}
+}	

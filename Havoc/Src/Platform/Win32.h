@@ -12,7 +12,7 @@ namespace Havoc
 		Win32(const WindowProperties& props);
 		virtual ~Win32();
 
-		void OnUpdate();
+		void OnUpdate() override;
 
 		void Init(const WindowProperties& props);
 		void shutdown();

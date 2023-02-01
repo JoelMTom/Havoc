@@ -8,7 +8,7 @@ namespace Havoc
 	{
 		m_runnning = true;
 		m_window = Window::Create();
-		H_CORE_FATAL("Havoc Engine {0}", "hello!");
+		/*H_CORE_FATAL("Havoc Engine {0}", "hello!");
 		H_CORE_ERROR("Havoc Engine {0}", "hello!");
 		H_CORE_WARN("Havoc Engine {0}", "hello!");
 		H_CORE_DEBUG("Havoc Engine {0}", "hello!");
@@ -22,7 +22,7 @@ namespace Havoc
 		H_CLIENT_WARN("Havoc Engine {0}", "hello!");
 		H_CLIENT_DEBUG("Havoc Engine {0}", "hello!");
 		H_CLIENT_INFO("Havoc Engine {0}", "hello!");
-		H_CLIENT_TRACE("Havoc Engine {0}", "hello!");
+		H_CLIENT_TRACE("Havoc Engine {0}", "hello!");*/
 	}
 
 	Application::~Application()

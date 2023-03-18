@@ -27,7 +27,6 @@
 *.lib
 
 # Executables
-*.exe
 *.out
 *.app
 
@@ -62,6 +61,9 @@ lib/*
 bin/*
 bin-int/
 test/test_runner
+
+*/bin/*
+*/bin-int/
 
 Makefile
 *.make

@@ -1,5 +1,7 @@
 #include "WindowsWindow.h"
 
+#include "Platform/OpenGL/OpenGLContext.h"
+
 #include "Havoc/Core/Log.h"
 
 namespace Havoc
@@ -41,12 +43,9 @@ namespace Havoc
 		m_Window = glfwCreateWindow(props.Width, props.Height, props.Title, nullptr, nullptr);
 		++s_GLFWwindowCount;
 
-		glfwMakeContextCurrent(m_Window);
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
 
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		{
-			H_CORE_ERROR("Could not load glad!");
-		}
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -55,7 +54,7 @@ namespace Havoc
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::Shutdown()

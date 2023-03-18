@@ -1,8 +1,10 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 #include "Window.h"
+#include "Platform/OpenGL/OpenGLBuffer.h"
 
 namespace Havoc
 {
@@ -19,8 +21,8 @@ namespace Havoc
 		std::unique_ptr<Window> m_window;
 
 		uint32_t m_VertexArray;
-		uint32_t m_VertexBuffer;
-		uint32_t m_IndexBuffer;
+		std::unique_ptr<VertexBuffer> m_VertexBuffer;
+		std::unique_ptr<IndexBuffer> m_IndexBuffer;
 	};
 
 	Application* CreateApplication();

@@ -5,7 +5,6 @@
 #include "Havoc/Core/Window.h"
 #include "Havoc/Renderer/GraphicsContext.h"
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace Havoc

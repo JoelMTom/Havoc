@@ -6,12 +6,12 @@ namespace Havoc
 {
 	struct WindowProperties
 	{
-		const char* m_title;
-		uint32_t m_width;
-		uint32_t m_height;
+		const char* Title;
+		uint32_t Width;
+		uint32_t Height;
 
 		WindowProperties(const char* title, uint32_t width, uint32_t height)
-			: m_title(title), m_width(width), m_height(height)
+			: Title(title), Width(width), Height(height)
 		{
 
 		}

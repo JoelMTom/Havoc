@@ -40,6 +40,7 @@ project "Havoc"
     includedirs
     {
         "%{wks.location}/Havoc/Dependencies/fmt/include",
+        "%{wks.location}/Havoc/Dependencies/GLFW/include",
         "%{wks.location}/Havoc/Src"
     }
 
@@ -47,7 +48,8 @@ project "Havoc"
 
     links 
     { 
-        "fmt"
+        "fmt",
+        "GLFW"
     }
 
 
@@ -77,8 +79,8 @@ project "HavocLand"
 
     includedirs
     {
+        "%{wks.location}/Havoc/Dependencies/fmt/include",
         "%{wks.location}/Havoc/src",
-        "%{wks.location}/Havoc/Dependencies/fmt/include"
     }
 
     location "%{wks.location}/HavocLand"
@@ -100,6 +102,7 @@ project "HavocLand"
 
 
 include "Havoc/Dependencies/fmt"
+include "Havoc/Dependencies/GLFW"
     
 
     

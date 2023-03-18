@@ -2,3 +2,6 @@
 [submodule "Havoc/Dependencies/fmt"]
 	path = Havoc/Dependencies/fmt
 	url = https://github.com/JoelMTom/fmt.git
+[submodule "Havoc/Dependencies/GLFW"]
+	path = Havoc/Dependencies/GLFW
+	url = git@github.com:JoelMTom/glfw.git

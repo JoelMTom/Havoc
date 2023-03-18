@@ -46,9 +46,9 @@ namespace Havoc
 {
 	Win32::Win32(const WindowProperties& props)
 	{
-		m_data.title = props.m_title;
-		m_data.width = props.m_width;
-		m_data.height = props.m_height;
+		m_data.title = props.Title;
+		m_data.width = props.Width;
+		m_data.height = props.Height;
 		Init(props);
 	}
 
@@ -88,11 +88,11 @@ namespace Havoc
 		HWND hwnd = CreateWindowExA(
 			window_ex_style,
 			"Havoc Engine",
-			props.m_title,
+			props.Title,
 			window_style,
 			CW_USEDEFAULT, CW_USEDEFAULT,
-			props.m_width,
-			props.m_height,
+			props.Width,
+			props.Height,
 			NULL,
 			NULL,
 			wc.hInstance,

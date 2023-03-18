@@ -41,6 +41,12 @@
 **/*.cbp
 **/CMakeScripts
 **/compile_commands.json
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.csproj
 
 include/divisible/*
 

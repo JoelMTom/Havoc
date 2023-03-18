@@ -42,6 +42,11 @@ namespace Havoc
 		++s_GLFWwindowCount;
 
 		glfwMakeContextCurrent(m_Window);
+
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		{
+			H_CORE_ERROR("Could not load glad!");
+		}
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

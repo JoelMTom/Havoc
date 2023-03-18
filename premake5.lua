@@ -41,6 +41,7 @@ project "Havoc"
     {
         "%{wks.location}/Havoc/Dependencies/fmt/include",
         "%{wks.location}/Havoc/Dependencies/GLFW/include",
+        "%{wks.location}/Havoc/Dependencies/glad/include",
         "%{wks.location}/Havoc/Src"
     }
 
@@ -49,7 +50,9 @@ project "Havoc"
     links 
     { 
         "fmt",
-        "GLFW"
+        "GLFW",
+        "glad",
+        "opengl32.lib"
     }
 
 
@@ -103,6 +106,7 @@ project "HavocLand"
 
 include "Havoc/Dependencies/fmt"
 include "Havoc/Dependencies/GLFW"
+include "Havoc/Dependencies/glad"
     
 
     

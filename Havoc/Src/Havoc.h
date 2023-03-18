@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "Core/Application.h"
-#include "Core/Log.h"
+#include "Havoc/Core/Application.h"
+#include "Havoc/Core/Log.h"
 
-#include "Core/EntryPoint.h"
+#include "Havoc/Core/EntryPoint.h"

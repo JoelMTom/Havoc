@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Window.h"
-#include "Core/Log.h"
+#include "Havoc/Core/Window.h"
+#include "Havoc/Core/Log.h"
 
 namespace Havoc
 {

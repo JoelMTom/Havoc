@@ -88,44 +88,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Dependencies\fmt\include\fmt\args.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\chrono.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\color.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\compile.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\core.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\format-inl.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\format.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\os.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\ostream.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\printf.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\ranges.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\std.h" />
-    <ClInclude Include="Dependencies\fmt\include\fmt\xchar.h" />
-    <ClInclude Include="Dependencies\fmt\test\fuzzing\fuzzer-common.h" />
-    <ClInclude Include="Dependencies\fmt\test\gtest-extra.h" />
-    <ClInclude Include="Dependencies\fmt\test\gtest\gmock\gmock.h" />
-    <ClInclude Include="Dependencies\fmt\test\gtest\gtest\gtest-spi.h" />
-    <ClInclude Include="Dependencies\fmt\test\gtest\gtest\gtest.h" />
-    <ClInclude Include="Dependencies\fmt\test\mock-allocator.h" />
-    <ClInclude Include="Dependencies\fmt\test\posix-mock.h" />
-    <ClInclude Include="Dependencies\fmt\test\scan.h" />
-    <ClInclude Include="Dependencies\fmt\test\test-assert.h" />
-    <ClInclude Include="Dependencies\fmt\test\util.h" />
-    <ClInclude Include="Src\Core\Application.h" />
-    <ClInclude Include="Src\Core\Core.h" />
-    <ClInclude Include="Src\Core\EntryPoint.h" />
-    <ClInclude Include="Src\Core\Log.h" />
-    <ClInclude Include="Src\Core\Logger.h" />
-    <ClInclude Include="Src\Core\Window.h" />
-    <ClInclude Include="Src\Events\Event.h" />
     <ClInclude Include="Src\Havoc.h" />
+    <ClInclude Include="Src\Havoc\Core\Application.h" />
+    <ClInclude Include="Src\Havoc\Core\EntryPoint.h" />
+    <ClInclude Include="Src\Havoc\Core\KeyCodes.h" />
+    <ClInclude Include="Src\Havoc\Core\Log.h" />
+    <ClInclude Include="Src\Havoc\Core\Logger.h" />
+    <ClInclude Include="Src\Havoc\Core\Window.h" />
+    <ClInclude Include="Src\Havoc\Events\Event.h" />
+    <ClInclude Include="Src\Havoc\Events\KeyEvent.h" />
     <ClInclude Include="Src\Platform\Win32.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Core\Application.cpp" />
-    <ClCompile Include="Src\Core\Core.cpp" />
-    <ClCompile Include="Src\Core\Log.cpp" />
-    <ClCompile Include="Src\Core\Window.cpp" />
+    <ClCompile Include="Src\Havoc\Core\Application.cpp" />
+    <ClCompile Include="Src\Havoc\Core\Log.cpp" />
+    <ClCompile Include="Src\Havoc\Core\Window.cpp" />
     <ClCompile Include="Src\Platform\Win32.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -33,8 +33,8 @@ project "Havoc"
 
     files
     {
-        "Havoc/**.h",
-        "Havoc/**.cpp"
+        "Havoc/Src/**.h",
+        "Havoc/Src/**.cpp"
     }
 
     includedirs

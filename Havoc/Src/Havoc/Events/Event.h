@@ -31,7 +31,7 @@ namespace Havoc
 	{
 	public:
 
-		bool m_handled = false;
+		bool Handled = false;
 
 		virtual ~Event() = default;
 
@@ -46,5 +46,26 @@ namespace Havoc
 			return GetEventCategoryFlags() & category;
 
 		}
+	};
+
+	class EventDispatcher
+	{
+	public:
+		EventDispatcher(Event event)
+			:m_Event(event) {}
+
+		template<typename T, typename F>
+		bool dispatch(const F& func)
+		{
+			if (m_Event.GetEventType() == T::GetStaticType())
+			{
+				m_Event.Handled |= func(static_cast<F&>(m_Event);
+				return true;
+			}
+
+			return false;
+		}
+	private:
+		Event& m_Event;
 	};
 }

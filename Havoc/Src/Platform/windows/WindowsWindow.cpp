@@ -60,6 +60,7 @@ namespace Havoc
 	void WindowsWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
+		delete m_Context;
 	}
 
 	void WindowsWindow::SetVSync(bool Vsync)

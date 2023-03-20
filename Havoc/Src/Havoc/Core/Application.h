@@ -4,7 +4,8 @@
 #include <memory>
 
 #include "Window.h"
-#include "Platform/OpenGL/OpenGLBuffer.h"
+#include "Havoc/Renderer/Buffer.h"
+#include "Havoc/Renderer/Shader.h"
 
 namespace Havoc
 {
@@ -23,6 +24,7 @@ namespace Havoc
 		uint32_t m_VertexArray;
 		std::unique_ptr<VertexBuffer> m_VertexBuffer;
 		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 	};
 
 	Application* CreateApplication();

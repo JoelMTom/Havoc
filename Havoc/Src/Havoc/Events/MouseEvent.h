@@ -4,6 +4,7 @@
 
 #include "Event.h"
 #include "Havoc/Core/KeyCodes.h"
+#include "Havoc/Core/MouseCodes.h"
 
 namespace Havoc
 {

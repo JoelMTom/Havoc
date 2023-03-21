@@ -3,6 +3,7 @@
 #include "Platform/OpenGL/OpenGLContext.h"
 
 #include "Havoc/Core/Log.h"
+#include "Havoc/Events/ApplicationEvent.h"
 
 namespace Havoc
 {
@@ -15,7 +16,11 @@ namespace Havoc
 
 	WindowsWindow::WindowsWindow(const WindowProperties& props)
 	{
-		Init(props);
+		m_Data.Title = props.Title;
+		m_Data.Width = props.Width;
+		m_Data.Height = props.Height;
+		m_Data.EventCallback = nullptr;
+		Init();
 	}
 
 	WindowsWindow::~WindowsWindow()
@@ -23,13 +28,10 @@ namespace Havoc
 		Shutdown();
 	}
 
-	void WindowsWindow::Init(const WindowProperties& props)
+	void WindowsWindow::Init()
 	{
-		m_Data.Title = props.Title;
-		m_Data.Width = props.Width;
-		m_Data.Height = props.Height;
 
-		H_CORE_INFO("Creating Window: {0} ({1}, {2})", props.Title, props.Width, props.Height);
+		H_CORE_INFO("Creating Window: {0} ({1}, {2})", m_Data.Title, m_Data.Width, m_Data.Height);
 
 		if (s_GLFWwindowCount == 0)
 		{
@@ -40,7 +42,7 @@ namespace Havoc
 			}
 		}
 
-		m_Window = glfwCreateWindow(props.Width, props.Height, props.Title, nullptr, nullptr);
+		m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		++s_GLFWwindowCount;
 
 		m_Context = new OpenGLContext(m_Window);
@@ -49,6 +51,18 @@ namespace Havoc
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				WindowCloseEvent event;
+				data.EventCallback(event);
+			});
+
+	}
+
+	void WindowsWindow::SetEventCallback(const EventCallbackFn& callback)
+	{
+		m_Data.EventCallback = callback;
 	}
 
 	void WindowsWindow::OnUpdate()
@@ -69,5 +83,10 @@ namespace Havoc
 			glfwSwapInterval(1);
 		else
 			glfwSwapInterval(0);
+	}
+
+	bool WindowsWindow::IsVSync() const
+	{
+		return m_Data.Vsync;
 	}
 }

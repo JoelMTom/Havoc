@@ -8,6 +8,7 @@ namespace Havoc
 	enum class EventType
 	{
 		None = 0,
+		WindowResize, WindowClose,
 		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, NouseButtonReleased, MouseMoved, MouseScrolled
 	};
@@ -15,10 +16,11 @@ namespace Havoc
 	enum EventCategory
 	{
 		None = 0,
-		EventCategoryInput = BIT(1),
-		EventCategoryKeyboard = BIT(2),
-		EventCategoryMouse = BIT(3),
-		EventCategoryMouseButton = BIT(4)
+		EventCategoryInput			= BIT(1),
+		EventCategoryKeyboard		= BIT(2),
+		EventCategoryMouse			= BIT(3),
+		EventCategoryMouseButton	= BIT(4),
+		EventCategoryApplication	= BIT(5)
 	};
 
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
@@ -51,7 +53,7 @@ namespace Havoc
 	class EventDispatcher
 	{
 	public:
-		EventDispatcher(Event event)
+		EventDispatcher(Event& event)
 			:m_Event(event) {}
 
 		template<typename T, typename F>
@@ -59,7 +61,7 @@ namespace Havoc
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.Handled |= func(static_cast<F&>(m_Event);
+				m_Event.Handled |= func(static_cast<T&>(m_Event));
 				return true;
 			}
 

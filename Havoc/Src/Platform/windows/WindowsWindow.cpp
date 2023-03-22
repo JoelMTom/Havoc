@@ -3,6 +3,7 @@
 #include "Platform/OpenGL/OpenGLContext.h"
 
 #include "Havoc/Core/Log.h"
+#include "Havoc/Events/KeyEvent.h"
 #include "Havoc/Events/ApplicationEvent.h"
 
 namespace Havoc
@@ -45,7 +46,7 @@ namespace Havoc
 		m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		++s_GLFWwindowCount;
 
-		m_Context = new OpenGLContext(m_Window);
+		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
@@ -56,6 +57,19 @@ namespace Havoc
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				WindowCloseEvent event;
 				data.EventCallback(event);
+			});
+
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				switch (action)
+				{
+				case GLFW_PRESS:
+				{
+					KeyPressedEvent event(scancode, false);
+					data.EventCallback(event);
+				}
+				}
 			});
 
 	}
@@ -74,7 +88,6 @@ namespace Havoc
 	void WindowsWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
-		delete m_Context;
 	}
 
 	void WindowsWindow::SetVSync(bool Vsync)

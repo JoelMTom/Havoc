@@ -6,14 +6,14 @@
 
 namespace Havoc
 {
-	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
+	std::shared_ptr<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::None:
 			H_CORE_ERROR("RendererAPI::None not supported!"); __debugbreak(); return nullptr;
 		case RendererAPI::OpenGL:
-			return new OpenGLVertexBuffer(vertices, size);
+			return std::make_shared<OpenGLVertexBuffer>(vertices, size);
 		}
 
 		H_CORE_ERROR("Unknown Renderer!");
@@ -21,8 +21,8 @@ namespace Havoc
 		return nullptr;
 	}
 
-	IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t count)
+	std::shared_ptr<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t count)
 	{
-		return new OpenGLIndexBuffer(indices, count);
+		return std::make_shared<OpenGLIndexBuffer>(indices, count);
 	}
 }	

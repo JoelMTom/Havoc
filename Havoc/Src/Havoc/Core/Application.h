@@ -7,6 +7,7 @@
 #include "Havoc/Events/Event.h"
 #include "Havoc/Renderer/Buffer.h"
 #include "Havoc/Renderer/Shader.h"
+#include "Havoc/Renderer/VertexArray.h"
 
 namespace Havoc
 {
@@ -19,17 +20,18 @@ namespace Havoc
 		void Run();
 		void OnEvent(Event& e);
 
-		bool Application::OnWindowClose(Event& e);
+		bool OnWindowClose(Event& e);
+		//bool OnKeyPressed(Event& e);
 
 	private:
 		std::string m_appName;
 		bool m_Running;
 		std::unique_ptr<Window> m_window;
 
-		uint32_t m_VertexArray;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
-		std::unique_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+		std::shared_ptr<VertexBuffer> m_VertexBuffer;
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_Shader;
 	};
 
 	Application* CreateApplication();

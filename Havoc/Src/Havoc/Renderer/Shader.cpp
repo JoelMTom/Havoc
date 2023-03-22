@@ -7,14 +7,14 @@
 
 namespace Havoc
 {
-	Shader* Shader::Create(const std::string& vertexsrc, const std::string& fragmentsrc)
+	std::shared_ptr<Shader> Shader::Create(const std::string& vertexsrc, const std::string& fragmentsrc)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::None:
 			H_CORE_ERROR("Shader for RendererAPI::None is not supported"); __debugbreak();
 		case RendererAPI::OpenGL:
-			return new OpenGLShader(vertexsrc, fragmentsrc);
+			return std::make_shared<OpenGLShader>(vertexsrc, fragmentsrc);
 		}
 
 		H_CORE_ERROR("Could initialize shader!");

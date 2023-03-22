@@ -30,7 +30,7 @@ namespace Havoc
 
 	private:
 		GLFWwindow* m_Window;
-		GraphicsContext* m_Context;
+		std::unique_ptr<GraphicsContext> m_Context;
 
 		struct WindowData
 		{

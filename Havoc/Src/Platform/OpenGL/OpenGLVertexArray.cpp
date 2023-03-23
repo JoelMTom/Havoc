@@ -74,6 +74,8 @@ namespace Havoc
 			index++;
 		}
 
+		m_VertexBuffers.push_back(vertexbuffer);
+
 	}
 
 	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexbuffer)

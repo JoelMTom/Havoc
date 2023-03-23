@@ -23,6 +23,17 @@ namespace Havoc
 
 	std::shared_ptr<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t count)
 	{
-		return std::make_shared<OpenGLIndexBuffer>(indices, count);
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::None:
+			H_CORE_ERROR("RendererAPI::None not supported!"); __debugbreak(); return nullptr;
+		case RendererAPI::OpenGL:
+			return std::make_shared<OpenGLIndexBuffer>(indices, count);
+		}
+
+		H_CORE_ERROR("Unknown Renderer!");
+		__debugbreak();
+		return nullptr;
+		
 	}
 }	

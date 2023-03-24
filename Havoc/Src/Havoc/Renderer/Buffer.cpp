@@ -10,9 +10,9 @@ namespace Havoc
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			H_CORE_ERROR("RendererAPI::None not supported!"); __debugbreak(); return nullptr;
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return std::make_shared<OpenGLVertexBuffer>(vertices, size);
 		}
 
@@ -25,9 +25,9 @@ namespace Havoc
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			H_CORE_ERROR("RendererAPI::None not supported!"); __debugbreak(); return nullptr;
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return std::make_shared<OpenGLIndexBuffer>(indices, count);
 		}
 

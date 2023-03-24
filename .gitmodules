@@ -5,3 +5,6 @@
 [submodule "Havoc/Dependencies/GLFW"]
 	path = Havoc/Dependencies/GLFW
 	url = git@github.com:JoelMTom/glfw.git
+[submodule "Havoc/Dependencies/glm"]
+	path = Havoc/Dependencies/glm
+	url = git@github.com:JoelMTom/glm.git

@@ -42,6 +42,7 @@ project "Havoc"
         "%{wks.location}/Havoc/Dependencies/fmt/include",
         "%{wks.location}/Havoc/Dependencies/GLFW/include",
         "%{wks.location}/Havoc/Dependencies/glad/include",
+        "%{wks.location}/Havoc/Dependencies/glm",
         "%{wks.location}/Havoc/Src"
     }
 

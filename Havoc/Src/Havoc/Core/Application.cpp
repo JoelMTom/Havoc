@@ -3,10 +3,10 @@
 
 #include <functional>
 
-#include <glad/glad.h>
-
 #include "Havoc/Events/ApplicationEvent.h"
 #include "Havoc/Events/KeyEvent.h"
+#include "Havoc/Renderer/RenderCommand.h"
+#include "Havoc/Renderer/Renderer.h"
 
 namespace Havoc
 {
@@ -145,18 +145,17 @@ namespace Havoc
 	{
 		while (m_Running)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
-
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			RenderCommand::ClearColor();
 
 			m_Shader->Bind();
-			//blueShader->Bind();
-			squareVA->Bind();
-			glDrawElements(GL_TRIANGLES, squareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
-			//m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::BeginScene();
+
+			Renderer::Submit(squareVA);
+			Renderer::Submit(m_VertexArray);
+
+			Renderer::EndScene();
 
 			m_window->OnUpdate();
 		}

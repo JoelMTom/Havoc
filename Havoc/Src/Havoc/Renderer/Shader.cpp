@@ -11,9 +11,9 @@ namespace Havoc
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			H_CORE_ERROR("Shader for RendererAPI::None is not supported"); __debugbreak();
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return std::make_shared<OpenGLShader>(vertexsrc, fragmentsrc);
 		}
 

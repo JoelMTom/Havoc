@@ -64,11 +64,16 @@ namespace Havoc
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				switch (action)
 				{
-				case GLFW_PRESS:
-				{
-					KeyPressedEvent event(scancode, false);
-					data.EventCallback(event);
-				}
+					case GLFW_PRESS:
+					{
+						KeyPressedEvent event(key, false);
+						data.EventCallback(event);
+					}
+					case GLFW_REPEAT:
+					{
+						KeyPressedEvent event(key, true);
+						data.EventCallback(event);
+					}
 				}
 			});
 

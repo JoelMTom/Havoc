@@ -38,6 +38,6 @@ namespace Havoc
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 
-		static std::unique_ptr<Window> Create(const WindowProperties& props = WindowProperties("Havoc Engine", 720, 600));
+		static std::unique_ptr<Window> Create(const WindowProperties& props = WindowProperties("Havoc Engine", 1280, 720));
 	};
 }	

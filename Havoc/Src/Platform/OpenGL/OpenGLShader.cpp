@@ -3,6 +3,9 @@
 #include "glad/glad.h"
 #include "Havoc/Core/Log.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <vector>
 
 namespace Havoc
@@ -129,5 +132,11 @@ namespace Havoc
 	OpenGLShader::~OpenGLShader()
 	{
 		glDeleteProgram(m_RendererID);
+	}
+
+	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
+	{
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 }

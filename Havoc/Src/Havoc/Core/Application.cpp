@@ -11,7 +11,7 @@
 namespace Havoc
 {
 	Application::Application(const char* appName)
-		:m_appName(appName)
+		:m_appName(appName), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 		m_Running = true;
 		m_window = Window::Create();
@@ -66,13 +66,16 @@ namespace Havoc
 			
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
+
+			uniform mat4 u_ViewProjection;
+
 			out vec3 v_Position;
 			out vec4 v_Color;
 			void main()
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -121,7 +124,7 @@ namespace Havoc
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
-		//dispatcher.dispatch<KeyPressedEvent>(std::bind(&Application::OnKeyPressed, this, std::placeholders::_1));
+		dispatcher.dispatch<KeyPressedEvent>(std::bind(&Application::OnKeyPressed, this, std::placeholders::_1));
 	}
 
 	bool Application::OnWindowClose(Event& e)
@@ -130,11 +133,30 @@ namespace Havoc
 		return true;
 	}
 
-	/*bool Application::OnKeyPressed(Event& e)
+	bool Application::OnKeyPressed(KeyPressedEvent& e)
 	{
-		H_CORE_DEBUG("{0}", e.ToString());
+		if (e.GetKeyCode() == Key::Left)
+		{
+			H_CORE_DEBUG("{0}", e.ToString());
+			m_Camera.SetPostion(m_Camera.GetPosition() - glm::vec3(m_CameraVel, 0.0f, 0.0f));
+		}
+		else if (e.GetKeyCode() == Key::Right)
+		{
+			H_CORE_DEBUG("{0}", e.ToString());
+			m_Camera.SetPostion(m_Camera.GetPosition() + glm::vec3(m_CameraVel, 0.0f, 0.0f));
+		}
+		else if (e.GetKeyCode() == Key::Up)
+		{
+			H_CORE_DEBUG("{0}", e.ToString());
+			m_Camera.SetPostion(m_Camera.GetPosition() + glm::vec3(0.0f, m_CameraVel, 0.0f));
+		}
+		else if (e.GetKeyCode() == Key::Down)
+		{
+			H_CORE_DEBUG("{0}", e.ToString());
+			m_Camera.SetPostion(m_Camera.GetPosition() - glm::vec3(0.0f, m_CameraVel, 0.0f));
+		}
 		return true;
-	}*/
+	}
 
 	Application::~Application()
 	{
@@ -148,12 +170,10 @@ namespace Havoc
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 			RenderCommand::ClearColor();
 
-			m_Shader->Bind();
+			Renderer::BeginScene(m_Camera);
 
-			Renderer::BeginScene();
-
-			Renderer::Submit(squareVA);
-			Renderer::Submit(m_VertexArray);
+			Renderer::Submit(m_Shader, squareVA);
+			Renderer::Submit(m_Shader, m_VertexArray);
 
 			Renderer::EndScene();
 

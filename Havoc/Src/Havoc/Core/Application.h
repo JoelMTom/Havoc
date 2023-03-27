@@ -6,10 +6,13 @@
 #include "Window.h"
 #include "Havoc/Events/Event.h"
 #include "Havoc/Events/KeyEvent.h"
+#include "Havoc/Events/ApplicationEvent.h"
 #include "Havoc/Renderer/Buffer.h"
 #include "Havoc/Renderer/Shader.h"
 #include "Havoc/Renderer/VertexArray.h"
 #include "Havoc/Renderer/OrthographicCamera.h"
+#include "Havoc/Core/Layer.h"
+#include "Havoc/Core/LayerStack.h"
 
 namespace Havoc
 {
@@ -22,13 +25,20 @@ namespace Havoc
 		void Run();
 		void OnEvent(Event& e);
 
-		bool OnWindowClose(Event& e);
+		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnKeyPressed(KeyPressedEvent& e);
+
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* layer);
+
+		static Application& Get() { return *s_Instance; }
 
 	private:
 		std::string m_appName;
-		bool m_Running;
+		bool m_Running = true;
 		std::unique_ptr<Window> m_window;
+
+		LayerStack m_LayerStack;
 
 		std::shared_ptr<VertexArray> m_VertexArray;
 		std::shared_ptr<VertexArray> squareVA;
@@ -40,6 +50,9 @@ namespace Havoc
 		OrthographicCamera m_Camera;
 
 		float m_CameraVel = 0.01f;
+
+	private:
+		static Application* s_Instance;
 	};
 
 	Application* CreateApplication();

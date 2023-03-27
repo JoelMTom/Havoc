@@ -3,17 +3,17 @@
 
 #include <functional>
 
-#include "Havoc/Events/ApplicationEvent.h"
-#include "Havoc/Events/KeyEvent.h"
 #include "Havoc/Renderer/RenderCommand.h"
 #include "Havoc/Renderer/Renderer.h"
 
 namespace Havoc
 {
+	Application* Application::s_Instance = nullptr;
+
 	Application::Application(const char* appName)
 		:m_appName(appName), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
-		m_Running = true;
+		s_Instance = this;
 		m_window = Window::Create();
 		m_window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
@@ -98,11 +98,14 @@ namespace Havoc
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
+
+			uniform mat4 u_ViewProjection;
+
 			out vec3 v_Position;
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -125,9 +128,16 @@ namespace Havoc
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
 		dispatcher.dispatch<KeyPressedEvent>(std::bind(&Application::OnKeyPressed, this, std::placeholders::_1));
+
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); it++)
+		{
+			if (e.Handled)
+				break;
+			(*it)->OnEvent(e);
+		}
 	}
 
-	bool Application::OnWindowClose(Event& e)
+	bool Application::OnWindowClose(WindowCloseEvent& e)
 	{
 		m_Running = false;
 		return true;
@@ -137,25 +147,33 @@ namespace Havoc
 	{
 		if (e.GetKeyCode() == Key::Left)
 		{
-			H_CORE_DEBUG("{0}", e.ToString());
 			m_Camera.SetPostion(m_Camera.GetPosition() - glm::vec3(m_CameraVel, 0.0f, 0.0f));
 		}
 		else if (e.GetKeyCode() == Key::Right)
 		{
-			H_CORE_DEBUG("{0}", e.ToString());
 			m_Camera.SetPostion(m_Camera.GetPosition() + glm::vec3(m_CameraVel, 0.0f, 0.0f));
 		}
 		else if (e.GetKeyCode() == Key::Up)
 		{
-			H_CORE_DEBUG("{0}", e.ToString());
 			m_Camera.SetPostion(m_Camera.GetPosition() + glm::vec3(0.0f, m_CameraVel, 0.0f));
 		}
 		else if (e.GetKeyCode() == Key::Down)
 		{
-			H_CORE_DEBUG("{0}", e.ToString());
 			m_Camera.SetPostion(m_Camera.GetPosition() - glm::vec3(0.0f, m_CameraVel, 0.0f));
 		}
-		return true;
+		return false;
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
+	}
+
+	void Application::PushOverlay(Layer* layer)
+	{
+		m_LayerStack.PushOverlay(layer);
+		layer->OnAttach();
 	}
 
 	Application::~Application()
@@ -173,9 +191,12 @@ namespace Havoc
 			Renderer::BeginScene(m_Camera);
 
 			Renderer::Submit(m_Shader, squareVA);
-			Renderer::Submit(m_Shader, m_VertexArray);
+			Renderer::Submit(blueShader, m_VertexArray);
 
 			Renderer::EndScene();
+
+			for (Layer* layer : m_LayerStack)
+				layer->OnUpdate();
 
 			m_window->OnUpdate();
 		}

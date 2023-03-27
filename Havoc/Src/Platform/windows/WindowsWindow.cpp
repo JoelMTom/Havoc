@@ -68,11 +68,13 @@ namespace Havoc
 					{
 						KeyPressedEvent event(key, false);
 						data.EventCallback(event);
+						break;
 					}
 					case GLFW_REPEAT:
 					{
 						KeyPressedEvent event(key, true);
 						data.EventCallback(event);
+						break;
 					}
 				}
 			});

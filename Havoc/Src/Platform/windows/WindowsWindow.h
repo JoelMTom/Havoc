@@ -24,6 +24,8 @@ namespace Havoc
 		virtual void SetVSync(bool enabled) override;
 		virtual bool IsVSync() const override;
 
+		virtual void* GetNativeWindow() const { return m_Window; }
+
 	private:
 		virtual void Init();
 		virtual void Shutdown();

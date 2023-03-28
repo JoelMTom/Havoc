@@ -22,7 +22,6 @@ namespace Havoc
 		void OnEvent(Event& e);
 
 		bool OnWindowClose(WindowCloseEvent& e);
-		//bool OnKeyPressed(KeyPressedEvent& e);
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
@@ -37,6 +36,8 @@ namespace Havoc
 		std::unique_ptr<Window> m_Window;
 
 		LayerStack m_LayerStack;
+
+		float m_LastFrameTime = 0.0f;
 
 	private:
 		static Application* s_Instance;

@@ -2,6 +2,8 @@
 #include "Log.h"
 
 #include <functional>
+#include "Havoc/Utils/PlatformUtils.h"
+#include "Havoc/Core/TimeStep.h"
 
 namespace Havoc
 {
@@ -20,7 +22,6 @@ namespace Havoc
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
-		//dispatcher.dispatch<KeyPressedEvent>(std::bind(&Application::OnKeyPressed, this, std::placeholders::_1));
 
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); it++)
 		{
@@ -35,27 +36,6 @@ namespace Havoc
 		m_Running = false;
 		return true;
 	}
-
-	//bool Application::OnKeyPressed(KeyPressedEvent& e)
-	//{
-	//	if (e.GetKeyCode() == Key::Left)
-	//	{
-	//		m_Camera.SetPostion(m_Camera.GetPosition() - glm::vec3(m_CameraVel, 0.0f, 0.0f));
-	//	}
-	//	else if (e.GetKeyCode() == Key::Right)
-	//	{
-	//		m_Camera.SetPostion(m_Camera.GetPosition() + glm::vec3(m_CameraVel, 0.0f, 0.0f));
-	//	}
-	//	else if (e.GetKeyCode() == Key::Up)
-	//	{
-	//		m_Camera.SetPostion(m_Camera.GetPosition() + glm::vec3(0.0f, m_CameraVel, 0.0f));
-	//	}
-	//	else if (e.GetKeyCode() == Key::Down)
-	//	{
-	//		m_Camera.SetPostion(m_Camera.GetPosition() - glm::vec3(0.0f, m_CameraVel, 0.0f));
-	//	}
-	//	return false;
-	//}
 
 	void Application::PushLayer(Layer* layer)
 	{
@@ -78,8 +58,11 @@ namespace Havoc
 	{
 		while (m_Running)
 		{
+			float time = Time::GetTime();
+			Timestep timestep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 
 			m_Window->OnUpdate();
 		}

@@ -115,17 +115,17 @@ public:
 		blueShader = Havoc::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc);
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Havoc::Timestep ts) override
 	{
 		if (Havoc::Input::IsKeyPressed(Havoc::Key::Left))
-			m_CameraPosition.x -= m_CameraMoveSpeed;
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
 		else if(Havoc::Input::IsKeyPressed(Havoc::Key::Right))
-			m_CameraPosition.x += m_CameraMoveSpeed;
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
 
 		if (Havoc::Input::IsKeyPressed(Havoc::Key::Up))
-			m_CameraPosition.y += m_CameraMoveSpeed;
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;
 		else if (Havoc::Input::IsKeyPressed(Havoc::Key::Down))
-			m_CameraPosition.y -= m_CameraMoveSpeed;
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
 
 		Havoc::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Havoc::RenderCommand::ClearColor();
@@ -143,7 +143,7 @@ public:
 
 	void OnEvent(Havoc::Event& e)
 	{
-		//H_CLIENT_DEBUG("{0}", e.ToString());
+		
 	}
 
 private:
@@ -157,7 +157,7 @@ private:
 	Havoc::OrthographicCamera m_Camera;
 
 	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 0.01f;
+	float m_CameraMoveSpeed = 5.0f;
 	float m_CameraRotation = 0.0f;
 };
 

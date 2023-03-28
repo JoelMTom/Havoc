@@ -14,5 +14,6 @@
 #include "Havoc/Renderer/OrthographicCamera.h"
 #include "Havoc/Renderer/Renderer.h"
 #include "Havoc/Renderer/RenderCommand.h"
+#include "Havoc/Core/TimeStep.h"
 
 #include "Havoc/Core/EntryPoint.h"

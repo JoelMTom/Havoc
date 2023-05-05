@@ -33,8 +33,12 @@ project "Havoc"
 
     files
     {
-        "Havoc/Src/**.h",
-        "Havoc/Src/**.cpp"
+        "%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/Dependencies/stb_image/**.h",
+		"%{prj.name}/Dependencies/stb_image/**.cpp",
+		"%{prj.name}/Dependencies/glm/glm/**.hpp",
+		"%{prj.name}/Dependencies/glm/glm/**.inl",
     }
 
     includedirs
@@ -43,6 +47,7 @@ project "Havoc"
         "%{wks.location}/Havoc/Dependencies/GLFW/include",
         "%{wks.location}/Havoc/Dependencies/glad/include",
         "%{wks.location}/Havoc/Dependencies/glm",
+        "%{wks.location}/Havoc/Dependencies/stb_image",
         "%{wks.location}/Havoc/Src"
     }
 

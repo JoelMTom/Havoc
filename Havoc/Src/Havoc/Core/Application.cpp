@@ -2,6 +2,8 @@
 #include "Log.h"
 
 #include <functional>
+
+#include "Havoc/Renderer/Renderer.h"
 #include "Havoc/Utils/PlatformUtils.h"
 #include "Havoc/Core/TimeStep.h"
 
@@ -15,6 +17,8 @@ namespace Havoc
 		s_Instance = this;
 		m_Window = Window::Create();
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
+
+		Renderer::Init();
 
 	}
 
@@ -61,6 +65,7 @@ namespace Havoc
 			float time = Time::GetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
+
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate(timestep);
 

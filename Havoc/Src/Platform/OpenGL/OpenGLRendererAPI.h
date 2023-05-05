@@ -8,6 +8,7 @@ namespace Havoc
 	{
 	public:
 
+		virtual void Init() override;
 		virtual void SetClearColor(const glm::vec4& color) override;
 		virtual void ClearColor() override;
 

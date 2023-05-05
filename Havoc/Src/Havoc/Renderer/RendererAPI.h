@@ -10,7 +10,7 @@ namespace Havoc
 {
 	class RendererAPI
 	{
-	public:
+ 	public:
 
 		enum class API
 		{
@@ -20,6 +20,7 @@ namespace Havoc
 	public:
 		virtual ~RendererAPI() = default;
 
+		virtual void Init() = 0;
 		virtual void SetClearColor(const glm::vec4& color) = 0;
 		virtual void ClearColor() = 0;
 
